@@ -25,4 +25,9 @@ class TicTacBoard():
         return not self.open_positions()
 
     def print_board(self):
-        pass
+        print("printing board")
+        for i in range(0, self.size):
+            for j in range(0, self.size):
+                 print(self.board[i][j], end ="|")
+            print("")
+            print("_______")
