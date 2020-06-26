@@ -23,3 +23,6 @@ class TicTacBoard():
 
     def is_game_over(self):
         return not self.open_positions()
+
+    def print_board(self):
+        pass
