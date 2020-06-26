@@ -19,12 +19,15 @@ if player2_symbol == player1_symbol:
 player1 = Player(player1_name, player1_symbol)
 player2 = Player(player2_name, player2_symbol)
 
-
-while not board.is_game_over():
+board.print_board()
+while True:
     position = player1.get_next_position(board.open_positions())
-    board.place_position(position, player1_symbol)
-    if board.is_game_over():
+    board.place_position(position, X_SYMBOL)
+    board.print_board()
+    if board.is_game_over(position, X_SYMBOL):
         break
     position = player2.get_next_position(board.open_positions())
-    board.place_position(position, player2_symbol)
+    board.place_position(position, O_SYMBOL)
     board.print_board()
+    if board.is_game_over(position, O_SYMBOL):
+       break

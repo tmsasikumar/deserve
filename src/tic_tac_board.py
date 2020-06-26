@@ -23,10 +23,10 @@ class TicTacBoard():
                     open_positions.append((i,j))
         return open_positions
 
-    def is_game_over(self):
-        self.is_success_player()
+    def is_game_over(self, position, symbol):
+        is_winner = self.is_success_player(position, symbol)
         all_places_covered = not self.open_positions()
-        return all_places_covered
+        return is_winner or all_places_covered
 
     def print_board(self):
         print("printing board")
@@ -36,5 +36,16 @@ class TicTacBoard():
             print("")
             print("_______")
 
-    def is_success_player(self):
-        pass
+    def is_success_player(self, last_position, symbol):
+        success_counter = 0
+        for i in range(0, self.size):
+            if self.board[i][last_position[1]] == symbol:
+                success_counter += 1
+        if success_counter == self.size:
+            return True
+        success_counter = 0
+        for i in range(0, self.size):
+            if self.board[last_position[0]][i] == symbol:
+                success_counter += 1
+        if success_counter == self.size:
+            return True
