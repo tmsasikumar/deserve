@@ -12,11 +12,9 @@ player1_symbol = input("Enter player1 symbol:")
 if not player1_symbol.strip():
     player1_symbol = X_SYMBOL
 
-player2_name = input("Enter player2 name:")
-player2_symbol = input("Enter player2 symbol:")
+player2_name = "Computer"
+player2_symbol = O_SYMBOL
 
-if not player2_symbol.strip():
-    player2_symbol = O_SYMBOL
 if player2_symbol == player1_symbol:
     print(player2_symbol+" is already used")
     player2_symbol = O_SYMBOL if player1_symbol == X_SYMBOL else X_SYMBOL
@@ -30,7 +28,7 @@ player2 = Player(player2_name, player2_symbol)
 board.print_board()
 
 
-def player_choose_input(player_name, player_symbol):
+def manual_player_choose_input(player_name, player_symbol):
     global input_position, position
     while True:
         input_position = input("Enter %s's position as X,Y coordinates (e.g 2,2) :" % (player_name))
@@ -42,7 +40,7 @@ def player_choose_input(player_name, player_symbol):
 
 
 while True:
-    player_choose_input(player1_name, player1_symbol)
+    manual_player_choose_input(player1_name, player1_symbol)
     if game.is_success_player(position, player1_symbol):
         print("%s wins" %(player1_name))
         break
@@ -50,7 +48,9 @@ while True:
         print("It is a tie")
         break
 
-    player_choose_input(player2_name, player2_symbol)
+    computer_next_position = player2.get_next_position(board.open_positions())
+    board.place_position(computer_next_position, player2_symbol)
+    board.print_board()
     if game.is_success_player(position, player2_symbol):
         print("%s wins" %(player2_name))
         break
