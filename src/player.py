@@ -9,4 +9,3 @@ class Player():
     def get_next_position(self, open_positions):
         return random.choice(open_positions)
 
-

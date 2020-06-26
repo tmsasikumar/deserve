@@ -9,9 +9,14 @@ game = Game(board)
 player1_name = input("Enter player1 name:")
 player1_symbol = input("Enter player1 symbol:")
 
+if not player1_symbol.strip():
+    player1_symbol = X_SYMBOL
+
 player2_name = input("Enter player2 name:")
 player2_symbol = input("Enter player2 symbol:")
 
+if not player2_symbol.strip():
+    player2_symbol = O_SYMBOL
 if player2_symbol == player1_symbol:
     print(player2_symbol+" is already used")
     player2_symbol = O_SYMBOL if player1_symbol == X_SYMBOL else X_SYMBOL

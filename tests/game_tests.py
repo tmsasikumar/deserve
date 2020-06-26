@@ -10,11 +10,6 @@ class GameTests(unittest.TestCase):
         board = TicTacBoard(3)
         game = Game(board)
         self.assertFalse(game.is_over())
-    #
-    # def test_return_false_if_game_is_not_over(self):
-    #     board = TicTacBoard(3)
-    #     self.assertFalse(board.is_game_over(position, X_SYMBOL))
-
 
     def test_game_over_if_diagnol_continous_block(self):
         board = TicTacBoard(3)
