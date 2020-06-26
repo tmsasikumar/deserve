@@ -1,8 +1,12 @@
 import unittest
+import sys
+from os.path import dirname, abspath
+d = dirname(dirname(dirname(abspath(__file__))))
+sys.path.append(d)
 
-from src.Constants import X_SYMBOL
-from src.game import Game
-from src.tic_tac_board import TicTacBoard
+from Deserve.src.Constants import X_SYMBOL
+from Deserve.src.game import Game
+from Deserve.src.tic_tac_board import TicTacBoard
 
 class GameTests(unittest.TestCase):
 
@@ -52,3 +56,6 @@ class GameTests(unittest.TestCase):
         board.place_position((0,1), "X")
         board.place_position((0,2), "O")
         self.assertFalse(game.is_success_player((0,2), "O"))
+
+if __name__ == "__main__":
+    unittest.main()

@@ -7,3 +7,5 @@
 * The game is designed with separate components like board, grid, players
 
 * Unit tests are written for scenarios.
+
+* Command to run the tests: python -m unittest discover -s tests -p  '*.py'
