@@ -22,28 +22,31 @@ player2 = Player(player2_name, player2_symbol)
 
 board.print_board()
 while True:
-    input_position = input("Enter %s's position as X,Y coordinates (e.g 2,2) :" %(player1_name))
-    player1_position = tuple(int(x) for x in input_position.split(','))
-    player1.is_position_valid(player1_position)
+    while True:
+        input_position = input("Enter %s's position as X,Y coordinates (e.g 2,2) :" %(player1_name))
+        position = tuple(int(x) for x in input_position.split(','))
+        if board.is_position_valid(position):
+            break
     # position = player1.get_next_position(board.open_positions())
-    position = player1_position
     board.place_position(position, player1_symbol)
     board.print_board()
     if board.is_success_player(position, player1_symbol):
-        print("Player 1 wins")
+        print("%s wins" %(player1_name))
         break
     if board.is_game_over():
         print("It is a tie")
         break
 
-    input_position = input("Enter %s's position as X,Y coordinates (e.g 2,2) :" %(player2_name))
-    player2_position = tuple(int(x) for x in input_position.split(','))
-    # position = player2.get_next_position(board.open_positions())
-    position = player2_position
+    while True:
+        input_position = input("Enter %s's position as X,Y coordinates (e.g 2,2) :" %(player2_name))
+        position = tuple(int(x) for x in input_position.split(','))
+        if board.is_position_valid(position):
+            break
+
     board.place_position(position, player2_symbol)
     board.print_board()
     if board.is_success_player(position, player2_symbol):
-        print("Player 2 wins")
+        print("%s wins" %(player2_name))
         break
     if board.is_game_over():
         print("It is a tie")
