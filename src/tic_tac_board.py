@@ -1,8 +1,11 @@
+import itertools
+
+
 class TicTacBoard():
     def __init__(self, n):
         self.size = n
-        items = ["-"]*n
-        self.board = [items]*n
+        temp = itertools.count(1)
+        self.board= [["-" for i in range(n)] for i in range(n)]
 
     def place_position(self, position, symbol):
         is_outside = position[0] > self.size or position[0] < 0 or position[1] > self.size or position[1] < 0
@@ -22,7 +25,8 @@ class TicTacBoard():
         return open_positions
 
     def is_game_over(self):
-        return not self.open_positions()
+        all_places_covered = not self.open_positions()
+        return all_places_covered
 
     def print_board(self):
         print("printing board")
