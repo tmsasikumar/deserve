@@ -27,10 +27,14 @@ class TicTacToeTests(unittest.TestCase):
     #     self.assertFalse(board.is_game_over(position, X_SYMBOL))
 
 
-    # def test_return_open_positions_for_game(self):
-    #     board = TicTacBoard(3)
-    #     self.assertEqual(board.open_positions(), [(1,1), (2,2)])
+    def test_if_item_position_in_open_position(self):
+        board = TicTacBoard(3)
+        self.assertTrue(board.is_position_valid((0,0)))
 
+    def test_if_item_position_in_open_position(self):
+        board = TicTacBoard(3)
+        board.place_position((0,0), "X")
+        self.assertFalse(board.is_position_valid((0,0)))
 
     def test_game_over_if_diagnol_continous_block(self):
         board = TicTacBoard(3)

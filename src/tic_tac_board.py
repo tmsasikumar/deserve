@@ -23,6 +23,9 @@ class TicTacBoard():
                     open_positions.append((i,j))
         return open_positions
 
+    def is_position_valid(self, position):
+        return position in self.open_positions()
+
     def is_game_over(self):
         all_places_covered = not self.open_positions()
         return all_places_covered
