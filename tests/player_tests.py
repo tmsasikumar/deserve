@@ -1,5 +1,7 @@
 import unittest
 from src.player import Player
+from src.tic_tac_board import TicTacBoard
+
 
 class PlayerTests(unittest.TestCase):
 
@@ -11,4 +13,5 @@ class PlayerTests(unittest.TestCase):
 
      def test_tell_a_position_for_symbol_placement(self):
          player = Player("Sasi", "X")
-         self.assertEquals(player.getNextPosition(), (2,3))
+         board = TicTacBoard(3)
+         self.assertIsNotNone(player.get_next_position(board.open_positions()))
