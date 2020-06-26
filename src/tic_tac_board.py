@@ -1,6 +1,5 @@
 import itertools
 
-
 class TicTacBoard():
     def __init__(self, n):
         self.size = n
@@ -25,6 +24,7 @@ class TicTacBoard():
         return open_positions
 
     def is_game_over(self):
+        self.is_success_player()
         all_places_covered = not self.open_positions()
         return all_places_covered
 
@@ -35,3 +35,6 @@ class TicTacBoard():
                  print(self.board[i][j], end ="|")
             print("")
             print("_______")
+
+    def is_success_player(self):
+        pass

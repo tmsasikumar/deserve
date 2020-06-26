@@ -30,3 +30,19 @@ class TicTacToeTests(unittest.TestCase):
     def test_return_open_positions_for_game(self):
         board = TicTacBoard(3)
         self.assertEqual(board.open_positions(), [(1,1), (2,2)])
+
+
+    def test_game_over_if_diagnol_continous_blocks(self):
+        board = TicTacBoard(3)
+        board.place_position((1,1), "X")
+        board.place_position((0,0), "X")
+        board.place_position((2,2), "X")
+        self.assertTrue(board.is_game_over())
+
+
+    def test_game_over_if_straight_continous_blocks(self):
+        board = TicTacBoard(3)
+        board.place_position((0,0), "O")
+        board.place_position((1,0), "O")
+        board.place_position((2,0), "O")
+        self.assertTrue(board.is_game_over())
