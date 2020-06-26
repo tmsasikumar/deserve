@@ -36,4 +36,3 @@ class TicTacToeTests(unittest.TestCase):
         board.place_position((0,0), "X")
         self.assertFalse(board.is_position_valid((0,0)))
 
-
