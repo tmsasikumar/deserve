@@ -4,14 +4,14 @@ from src.tic_tac_board import TicTacBoard
 
 board = TicTacBoard(3)
 
-player1_name = input("Enter the player1 name:")
-player1_symbol = input("Enter the player1 symbol:")
+player1_name = input("Enter player1 name:")
+player1_symbol = input("Enter player1 symbol:")
 
-player2_name = input("Enter the player2 name:")
-player2_symbol = input("Enter the player2 symbol:")
+player2_name = input("Enter player2 name:")
+player2_symbol = input("Enter player2 symbol:")
 
 if player2_symbol == player1_symbol:
-    print(player2_symbol+" is Already used")
+    print(player2_symbol+" is already used")
     player2_symbol = O_SYMBOL if player1_symbol == X_SYMBOL else X_SYMBOL
     print("Hence allocating - " + player2_symbol)
 
