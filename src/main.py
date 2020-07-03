@@ -1,4 +1,4 @@
-from src.Constants import X_SYMBOL, O_SYMBOL
+from src.Constants import X_SYMBOL, O_SYMBOL, DRAW
 from src.game import Game
 from src.player import Player
 from src.tic_tac_board import TicTacBoard
@@ -39,7 +39,7 @@ def manual_player_choose_input(player_name, player_symbol):
 
 while True:
     last_position = manual_player_choose_input(player1_name, player1_symbol)
-    if game.is_success_player(position, player1_symbol):
+    if game.is_completed_with_win(game.getBoard()) != DRAW:
         print("%s wins" %(player1_name))
         break
     if game.is_over():
@@ -49,7 +49,7 @@ while True:
     computer_next_position = player2.get_next_position(game,player2_symbol, player1_symbol, last_position)
     board.place_position(computer_next_position, player2_symbol)
     board.print_board()
-    if game.is_success_player(computer_next_position, player2_symbol):
+    if game.is_completed_with_win(game.getBoard()) != DRAW:
         print("%s wins" %(player2_name))
         break
     if game.is_over():

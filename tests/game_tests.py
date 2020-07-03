@@ -1,6 +1,6 @@
 import unittest
 
-from src.Constants import X_SYMBOL
+from src.Constants import X_SYMBOL, X_WINS, O_WINS, DRAW
 from src.game import Game
 from src.tic_tac_board import TicTacBoard
 
@@ -17,7 +17,7 @@ class GameTests(unittest.TestCase):
         board.place_position((0,0), "X")
         board.place_position((1,1), "X")
         board.place_position((2,2), "X")
-        self.assertTrue(game.is_success_player((2, 2), "X"))
+        self.assertEqual(game.is_completed_with_win(board.grid), X_WINS)
 
     def test_game_over_if_reverse_diagnol_continous_block(self):
         board = TicTacBoard(3)
@@ -25,7 +25,7 @@ class GameTests(unittest.TestCase):
         board.place_position((1,1), "X")
         board.place_position((0,2), "X")
         board.place_position((2,0), "X")
-        self.assertTrue(game.is_success_player((2, 0), "X"))
+        self.assertEqual(game.is_completed_with_win(board.grid), X_WINS)
 
     def test_game_over_if_straight_continous_blocks(self):
         board = TicTacBoard(3)
@@ -33,7 +33,7 @@ class GameTests(unittest.TestCase):
         board.place_position((0,0), "O")
         board.place_position((1,0), "O")
         board.place_position((2,0), "O")
-        self.assertTrue(game.is_success_player((2,0), "O"))
+        self.assertEqual(game.is_completed_with_win(board.grid), O_WINS)
 
     def test_game_over_if_straight_continous_blocks(self):
         board = TicTacBoard(3)
@@ -41,9 +41,7 @@ class GameTests(unittest.TestCase):
         board.place_position((0,0), "O")
         board.place_position((0,1), "O")
         board.place_position((0,2), "O")
-        self.assertTrue(game.is_success_player((0,1), "O"))
-
-
+        self.assertEqual(game.is_completed_with_win(board.grid), O_WINS)
 
     def test_game_failure_if_straight_continous_blocks(self):
         board = TicTacBoard(3)
@@ -51,7 +49,7 @@ class GameTests(unittest.TestCase):
         board.place_position((0,0), "O")
         board.place_position((0,1), "X")
         board.place_position((0,2), "O")
-        self.assertFalse(game.is_success_player((0,2), "O"))
+        self.assertEqual(game.is_completed_with_win(board.grid), DRAW)
 
 if __name__ == "__main__":
     unittest.main()

@@ -27,7 +27,7 @@ class Player():
             best_position = ()
             new_board.place_position(open_pos, player2_symbol)
             current_grid = new_board.grid
-            res = self.solve(current_grid)
+            res = self.solve(current_grid, game)
             # res = self.solve([['X', 'O', 'X'], ['O', 'X', '_'], ['O', '_', 'X']])
             if player2_symbol == O_SYMBOL:
                 if res == O_WINS:
@@ -70,25 +70,7 @@ class Player():
 
         return branches
 
-    def get_static_eval(self, pos):
-        potential_wins = []
-        # Three in a row
-        for row in pos:
-            potential_wins.append(set(row))
-        # Three in a column
-        for i in range(3):
-            potential_wins.append(set([pos[k][i] for k in range(3)]))
-        # Three in a diagonal
-        potential_wins.append(set([pos[i][i] for i in range(3)]))
-        potential_wins.append(set([pos[i][2 - i] for i in range(3)]))
 
-        # Checking if any three are the same
-        for trio in potential_wins:
-            if trio == set([X_SYMBOL]):
-                return X_WINS
-            elif trio == set([O_SYMBOL]):
-                return O_WINS
-        return DRAW
 
     def is_full(self, pos):
         for row in pos:
@@ -96,11 +78,11 @@ class Player():
                 return False
         return True
 
-    def solve(self, pos):
+    def solve(self, pos, game):
         #check if player has won in the given position
         X_turn = self.is_X_turn(pos)
-        # refactor the below method call with is_player_success
-        static_eval = self.get_static_eval(pos)
+
+        static_eval = game.is_completed_with_win(pos)
 
         if static_eval != DRAW:
             return static_eval
@@ -111,7 +93,7 @@ class Player():
 
         # Based on position find whose turn is next turn if x turn return true
         branches = self.get_branches(pos, X_turn)
-        branch_evals = [self.solve(branch) for branch in branches]
+        branch_evals = [self.solve(branch, game) for branch in branches]
 
         # Returning the result assuming best play
         if X_turn:

@@ -1,4 +1,4 @@
-from src.Constants import BLANK
+from src.Constants import BLANK, X_SYMBOL, X_WINS, O_SYMBOL, O_WINS, DRAW
 
 
 class Game():
@@ -45,22 +45,42 @@ class Game():
         win_pos = self.possible_win_calc("ROW", symbol, last_position)
         return win_pos
 
-    def is_success_player(self, last_position, symbol):
-        success_counter = 0
-        for i in range(0, self.getBoardSize()):
-            if self.getBoard()[i][last_position[1]] == symbol:
-                success_counter += 1
-        if success_counter == self.getBoardSize():
-            return True
-        success_counter = 0
-        for i in range(0, self.getBoardSize()):
-            if self.getBoard()[last_position[0]][i] == symbol:
-                success_counter += 1
-        if success_counter == self.getBoardSize():
-            return True
-        if self.check_straight_diagnols(symbol):
-            return True
-        return self.check_reverse_diagnols(symbol, self.getBoardSize()-1, -1, -1)
+    def is_completed_with_win(self, pos):
+        potential_wins = []
+        # Three in a row
+        for row in pos:
+            potential_wins.append(set(row))
+        # Three in a column
+        for i in range(3):
+            potential_wins.append(set([pos[k][i] for k in range(3)]))
+        # Three in a diagonal
+        potential_wins.append(set([pos[i][i] for i in range(3)]))
+        potential_wins.append(set([pos[i][2 - i] for i in range(3)]))
+
+        # Checking if any three are the same
+        for trio in potential_wins:
+            if trio == set([X_SYMBOL]):
+                return X_WINS
+            elif trio == set([O_SYMBOL]):
+                return O_WINS
+        return DRAW
+
+    # def is_success_player(self, last_position, symbol):
+    #     success_counter = 0
+    #     for i in range(0, self.getBoardSize()):
+    #         if self.getBoard()[i][last_position[1]] == symbol:
+    #             success_counter += 1
+    #     if success_counter == self.getBoardSize():
+    #         return True
+    #     success_counter = 0
+    #     for i in range(0, self.getBoardSize()):
+    #         if self.getBoard()[last_position[0]][i] == symbol:
+    #             success_counter += 1
+    #     if success_counter == self.getBoardSize():
+    #         return True
+    #     if self.check_straight_diagnols(symbol):
+    #         return True
+    #     return self.check_reverse_diagnols(symbol, self.getBoardSize()-1, -1, -1)
 
 
     def check_straight_diagnols(self, symbol):
