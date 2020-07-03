@@ -13,9 +13,10 @@ class Player():
 
     def get_next_position(self, game, player2_symbol, player1_symbol, last_position):
 
-        # Add logic to get possible win for current player
+        # todo Add logic to get possible win for current player
         # current_win_pos = game.possible_win_for_opponent(player2_symbol, last_position)
 
+        # todo add diagonal case
         win_pos = game.possible_win_for_opponent(player1_symbol, last_position)
         if win_pos:
             return win_pos
