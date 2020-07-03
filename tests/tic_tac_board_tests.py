@@ -17,14 +17,6 @@ class TicTacToeTests(unittest.TestCase):
         board = TicTacBoard(3)
         isValid = board.place_position((1,1), "X")
         self.assertTrue(isValid)
-    #
-    # def test_check_if_game_is_over(self):
-    #     board = TicTacBoard(3)
-    #     self.assertTrue(board.is_game_over(position, X_SYMBOL))
-    #
-    # def test_return_false_if_game_is_not_over(self):
-    #     board = TicTacBoard(3)
-    #     self.assertFalse(board.is_game_over(position, X_SYMBOL))
 
 
     def test_if_item_position_in_open_position(self):
@@ -36,3 +28,7 @@ class TicTacToeTests(unittest.TestCase):
         board.place_position((0,0), "X")
         self.assertFalse(board.is_position_valid((0,0)))
 
+
+    def test_should_get_all_possible_combos(self):
+        board = TicTacBoard(3)
+        print(board.get_all_possible_combos())

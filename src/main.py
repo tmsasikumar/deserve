@@ -20,13 +20,10 @@ if player2_symbol == player1_symbol:
     player2_symbol = O_SYMBOL if player1_symbol == X_SYMBOL else X_SYMBOL
     print("Hence allocating - " + player2_symbol)
 
-
 player1 = Player(player1_name, player1_symbol)
 player2 = Player(player2_name, player2_symbol)
 
-
 board.print_board()
-
 
 def manual_player_choose_input(player_name, player_symbol):
     global input_position, position
@@ -37,10 +34,11 @@ def manual_player_choose_input(player_name, player_symbol):
             break
     board.place_position(position, player_symbol)
     board.print_board()
+    return position
 
 
 while True:
-    manual_player_choose_input(player1_name, player1_symbol)
+    last_position = manual_player_choose_input(player1_name, player1_symbol)
     if game.is_success_player(position, player1_symbol):
         print("%s wins" %(player1_name))
         break
@@ -48,10 +46,10 @@ while True:
         print("It is a tie")
         break
 
-    computer_next_position = player2.get_next_position(board.open_positions())
+    computer_next_position = player2.get_next_position(game,player2_symbol, player1_symbol, last_position)
     board.place_position(computer_next_position, player2_symbol)
     board.print_board()
-    if game.is_success_player(position, player2_symbol):
+    if game.is_success_player(computer_next_position, player2_symbol):
         print("%s wins" %(player2_name))
         break
     if game.is_over():

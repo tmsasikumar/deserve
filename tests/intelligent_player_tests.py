@@ -13,10 +13,20 @@ class IntelligentPlayerTests(unittest.TestCase):
         self.assertEqual(player.symbol, "X")
 
 
-     def test_tell_right_position_for_symbol_placement(self):
+     def test_if_grid_empty_place_in_center(self):
          player = IntelligentPlayer("Sasi", "X")
          board = TicTacBoard(3)
-         self.assertEquals(player.get_next_position(board.open_positions()), (1,1))
+         self.assertEquals(player.get_next_position(board.grid), (1,1))
+
+
+
+     def test_if_possibility_of_computer_win_place_in_position(self):
+         player = IntelligentPlayer("Sasi", "X")
+         board = TicTacBoard(3)
+         board.place_position((1,1), "X")
+         board.place_position((1,0), "O")
+         board.place_position((0,2), "X")
+         self.assertEquals(player.get_next_position(board.grid), (2,2))
 
 
 
@@ -26,4 +36,14 @@ class IntelligentPlayerTests(unittest.TestCase):
          board.place_position((1,1), "O")
          board.place_position((2,2), "X")
          board.place_position((0,2), "O")
-         self.assertEquals(player.get_next_position(board.open_positions()), (2,0))
+         self.assertEquals(player.get_next_position(board.grid), (2,0))
+
+
+
+     def test_place_next_best_position(self):
+         player = IntelligentPlayer("Sasi", "X")
+         board = TicTacBoard(3)
+         board.place_position((1,1), "O")
+         board.place_position((2,2), "X")
+         board.place_position((0,2), "O")
+         self.assertEquals(player.get_next_position(board.grid), (2,0))
