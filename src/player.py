@@ -70,8 +70,6 @@ class Player():
 
         return branches
 
-
-
     def is_full(self, pos):
         for row in pos:
             if BLANK in row:
