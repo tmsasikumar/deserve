@@ -13,12 +13,11 @@ class Player():
 
     def get_next_position(self, game, player2_symbol, player1_symbol):
 
-        current_win_pos = game.possible_win_for_opponent(player2_symbol)
+        current_win_pos = game.possible_win_for_player(player2_symbol)
         if current_win_pos:
             return current_win_pos
 
-        # todo add diagonal case
-        block_win_pos = game.possible_win_for_opponent(player1_symbol)
+        block_win_pos = game.possible_win_for_player(player1_symbol)
         if block_win_pos:
             return block_win_pos
         board = game.getGameBoard()

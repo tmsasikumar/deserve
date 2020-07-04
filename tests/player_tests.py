@@ -39,3 +39,22 @@ class PlayerTests(unittest.TestCase):
          game = Game(board)
          board.place_position((1,1), "X")
          self.assertEqual(player.get_next_position(game, "O", "X"), (2,2))
+
+     def test_block_opponent_from_winning_right_diagonal(self):
+         player = Player("Sasi", "X")
+         board = TicTacBoard(3)
+         game = Game(board)
+         board.place_position((1,1), "X")
+         board.place_position((2,2), "O")
+         board.place_position((2,0), "X")
+         self.assertEqual(player.get_next_position(game, "O", "X"), (0,2))
+
+     def test_block_opponent_from_winning_left_diagonal(self):
+         player = Player("Sasi", "X")
+         board = TicTacBoard(3)
+         game = Game(board)
+         board.place_position((2,2), "X")
+         board.place_position((2,1), "O")
+         board.place_position((1,1), "X")
+         self.assertEqual(player.get_next_position(game, "O", "X"), (0,0))
+

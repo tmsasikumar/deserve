@@ -35,7 +35,7 @@ class Game():
                     return win_pos
         return ()
 
-    def possible_win_for_opponent(self, symbol):
+    def possible_win_for_player(self, symbol):
         win_pos = ()
         # Check column for potential win
         win_pos = self.possible_win_calc("COLUMN", symbol)
@@ -43,6 +43,15 @@ class Game():
             return win_pos
         # Check row for potential win
         win_pos = self.possible_win_calc("ROW", symbol)
+        if win_pos:
+            return win_pos
+        # Check first diagonal for potential win
+        win_pos = self.possible_win_calc_diagonal("LEFT", symbol)
+        if win_pos:
+            return win_pos
+        # Check second diagonal for potential win
+        win_pos = self.possible_win_calc_diagonal("RIGHT", symbol)
+
         return win_pos
 
     def is_completed_with_win(self, pos):
@@ -64,3 +73,19 @@ class Game():
             elif trio == set([O_SYMBOL]):
                 return O_WINS
         return DRAW
+
+    def possible_win_calc_diagonal(self, order, symbol):
+        symbol_counter = 0
+        blank_counter = 0
+        for i in range(0, self.getBoardSize()):
+            temp = self.getBoard()[i][i] if order == "LEFT" else self.getBoard()[i][2-i]
+            if temp == symbol:
+                symbol_counter += 1
+            elif temp == BLANK:
+                blank_counter += 1
+                win_pos = (i,i) if order == "LEFT" else (i, 2-i)
+            if symbol_counter == self.getBoardSize() -1 and blank_counter == 1:
+                return win_pos
+
+        return ()
+
