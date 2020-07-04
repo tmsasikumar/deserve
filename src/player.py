@@ -11,15 +11,16 @@ class Player():
         self.name = name
         self.symbol = symbol
 
-    def get_next_position(self, game, player2_symbol, player1_symbol, last_position):
+    def get_next_position(self, game, player2_symbol, player1_symbol):
 
-        # todo Add logic to get possible win for current player
-        # current_win_pos = game.possible_win_for_opponent(player2_symbol, last_position)
+        current_win_pos = game.possible_win_for_opponent(player2_symbol)
+        if current_win_pos:
+            return current_win_pos
 
         # todo add diagonal case
-        win_pos = game.possible_win_for_opponent(player1_symbol, last_position)
-        if win_pos:
-            return win_pos
+        block_win_pos = game.possible_win_for_opponent(player1_symbol)
+        if block_win_pos:
+            return block_win_pos
         board = game.getGameBoard()
         open_positions = board.open_positions()
 

@@ -19,30 +19,30 @@ class Game():
         all_places_covered = not self.tic_tac_board.open_positions()
         return all_places_covered
 
-    def possible_win_calc(self, order, symbol, last_position):
-        symbol_counter = 0
-        blank_counter = 0
-        for i in range(0, self.getBoardSize()):
-            temp = self.getBoard()[last_position[0]][i]
-            if order == 'COLUMN':
-                temp = self.getBoard()[i][last_position[1]]
-            if temp == symbol:
-                symbol_counter += 1
-            elif temp == BLANK:
-                blank_counter += 1
-                win_pos = (i, last_position[1]) if order == "COLUMN" else ((last_position[0], i))
-            if symbol_counter == self.getBoardSize() - 1 and blank_counter == 1:
-                return win_pos
+    def possible_win_calc(self, order, symbol):
+
+        for row in range(0, self.getBoardSize()):
+            symbol_counter = 0
+            blank_counter = 0
+            for col in range(0, self.getBoardSize()):
+                temp = self.getBoard()[row][col] if order == "COLUMN" else self.getBoard()[col][row]
+                if temp == symbol:
+                    symbol_counter += 1
+                elif temp == BLANK:
+                    blank_counter += 1
+                    win_pos = (row, col) if order == "COLUMN" else (col, row)
+                if symbol_counter == self.getBoardSize() - 1 and blank_counter == 1:
+                    return win_pos
         return ()
 
-    def possible_win_for_opponent(self, symbol, last_position):
+    def possible_win_for_opponent(self, symbol):
         win_pos = ()
         # Check column for potential win
-        win_pos = self.possible_win_calc("COLUMN", symbol, last_position)
+        win_pos = self.possible_win_calc("COLUMN", symbol)
         if win_pos:
             return win_pos
         # Check row for potential win
-        win_pos = self.possible_win_calc("ROW", symbol, last_position)
+        win_pos = self.possible_win_calc("ROW", symbol)
         return win_pos
 
     def is_completed_with_win(self, pos):

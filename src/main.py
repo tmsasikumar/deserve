@@ -46,7 +46,7 @@ while True:
         print("It is a tie")
         break
 
-    computer_next_position = player2.get_next_position(game,player2_symbol, player1_symbol, last_position)
+    computer_next_position = player2.get_next_position(game,player2_symbol, player1_symbol)
     board.place_position(computer_next_position, player2_symbol)
     board.print_board()
     if game.is_completed_with_win(game.getBoard()) != DRAW:
