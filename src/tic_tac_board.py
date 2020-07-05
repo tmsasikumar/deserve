@@ -32,24 +32,3 @@ class TicTacBoard():
                  print(self.grid[i][j], end ="|")
             print("")
             print("_______")
-
-
-    def get_all_possible_combos(self):
-        positions = []
-        positions.append(self.getLinearPositions(positions))
-        return  positions
-
-    def getHorizontalPositions(self, positions):
-        for i in range(0, self.size):
-            position = []
-            for j in range(0, self.size):
-                position.append((i, j))
-            positions.append(position)
-
-
-    def getLinearPositions(self, positions):
-        for i in range(0, self.size):
-            position = []
-            for j in range(0, self.size):
-                position.append((j, i))
-            positions.append(position)
