@@ -1,16 +1,11 @@
-import random
-
-from src.Constants import X_SYMBOL, O_SYMBOL, BLANK, X_WINS, DRAW, O_WINS, O_SYMBOL
 import copy
-from src.game import Game
-from src.tic_tac_board import TicTacBoard
+
+from src.Constants import X_SYMBOL, BLANK, X_WINS, DRAW, O_WINS, O_SYMBOL
+
+
 # Square definitions
 
 class BotVeryHardPlayable():
-    def __init__(self, name, symbol):
-        self.name = name
-        self.symbol = symbol
-
     def make_next_move(self, game, player2_symbol, player1_symbol):
 
         current_win_pos = game.possible_win_for_player(player2_symbol)
