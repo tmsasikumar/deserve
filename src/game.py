@@ -3,8 +3,9 @@ from src.Constants import BLANK, X_SYMBOL, X_WINS, O_SYMBOL, O_WINS, DRAW, LEFT,
 
 class Game():
 
-    def __init__(self, board):
+    def __init__(self, board, difficulty_level):
         self.tic_tac_board = board
+        self.difficulty_level = difficulty_level
 
     def getBoardSize(self):
         return self.tic_tac_board.size
@@ -53,11 +54,11 @@ class Game():
         for row in pos:
             potential_wins.append(set(row))
         # Three in a column
-        for i in range(3):
-            potential_wins.append(set([pos[k][i] for k in range(3)]))
+        for i in range(self.getBoardSize()):
+            potential_wins.append(set([pos[k][i] for k in range(self.getBoardSize())]))
         # Three in a diagonal
-        potential_wins.append(set([pos[i][i] for i in range(3)]))
-        potential_wins.append(set([pos[i][2 - i] for i in range(3)]))
+        potential_wins.append(set([pos[i][i] for i in range(self.getBoardSize())]))
+        potential_wins.append(set([pos[i][self.getBoardSize()-1 - i] for i in range(self.getBoardSize())]))
 
         # Checking if any three are the same
         for trio in potential_wins:
@@ -71,12 +72,12 @@ class Game():
         symbol_counter = 0
         blank_counter = 0
         for i in range(0, self.getBoardSize()):
-            temp = self.getBoard()[i][i] if order == LEFT else self.getBoard()[i][2-i]
+            temp = self.getBoard()[i][i] if order == LEFT else self.getBoard()[i][self.getBoardSize() -1 -i]
             if temp == symbol:
                 symbol_counter += 1
             elif temp == BLANK:
                 blank_counter += 1
-                win_pos = (i,i) if order == LEFT else (i, 2-i)
+                win_pos = (i,i) if order == LEFT else (i, self.getBoardSize() -1 -i)
             if symbol_counter == self.getBoardSize() -1 and blank_counter == 1:
                 return win_pos
 

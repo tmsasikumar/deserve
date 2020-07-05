@@ -6,22 +6,12 @@ from src.game import Game
 from src.tic_tac_board import TicTacBoard
 # Square definitions
 
-"""
-  1 - system makes Random moves
-  2 - if there is a win for the system,it will take win , else play randomly
-  3 - if there is a win for the system,it will take win. if there is a win for the player it will block. else it will play
-  randomly
-  4 - if there is a win for the system,it will take win. if there is a win for the player it will block.else it will create a tree 
-  and find best possible move 
-  5 - 4 + it should find probability value for wins 
-"""
-
-class Player():
+class BotVeryHardPlayable():
     def __init__(self, name, symbol):
         self.name = name
         self.symbol = symbol
 
-    def get_next_position(self, game, player2_symbol, player1_symbol):
+    def make_next_move(self, game, player2_symbol, player1_symbol):
 
         current_win_pos = game.possible_win_for_player(player2_symbol)
         if current_win_pos:

@@ -8,12 +8,12 @@ class GameTests(unittest.TestCase):
 
     def test_check_if_game_is_over(self):
         board = TicTacBoard(3)
-        game = Game(board)
+        game = Game(board, difficulty_level)
         self.assertFalse(game.is_over())
 
     def test_game_over_if_diagnol_continous_block(self):
         board = TicTacBoard(3)
-        game = Game(board)
+        game = Game(board, difficulty_level)
         board.place_position((0,0), "X")
         board.place_position((1,1), "X")
         board.place_position((2,2), "X")
@@ -21,7 +21,7 @@ class GameTests(unittest.TestCase):
 
     def test_game_over_if_reverse_diagnol_continous_block(self):
         board = TicTacBoard(3)
-        game = Game(board)
+        game = Game(board, difficulty_level)
         board.place_position((1,1), "X")
         board.place_position((0,2), "X")
         board.place_position((2,0), "X")
@@ -29,7 +29,7 @@ class GameTests(unittest.TestCase):
 
     def test_game_over_if_straight_continous_blocks(self):
         board = TicTacBoard(3)
-        game = Game(board)
+        game = Game(board, difficulty_level)
         board.place_position((0,0), "O")
         board.place_position((1,0), "O")
         board.place_position((2,0), "O")
@@ -37,7 +37,7 @@ class GameTests(unittest.TestCase):
 
     def test_game_over_if_straight_continous_blocks(self):
         board = TicTacBoard(3)
-        game = Game(board)
+        game = Game(board, difficulty_level)
         board.place_position((0,0), "O")
         board.place_position((0,1), "O")
         board.place_position((0,2), "O")
@@ -45,7 +45,7 @@ class GameTests(unittest.TestCase):
 
     def test_game_failure_if_straight_continous_blocks(self):
         board = TicTacBoard(3)
-        game = Game(board)
+        game = Game(board, difficulty_level)
         board.place_position((0,0), "O")
         board.place_position((0,1), "X")
         board.place_position((0,2), "O")

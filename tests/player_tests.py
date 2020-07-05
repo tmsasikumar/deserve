@@ -16,7 +16,7 @@ class PlayerTests(unittest.TestCase):
      def test_block_opponent_from_winning(self):
          player = Player("Sasi", "X")
          board = TicTacBoard(3)
-         game = Game(board)
+         game = Game(board, difficulty_level)
          board.place_position((1,1), "X")
          board.place_position((2,2), "O")
          board.place_position((0,1), "X")
@@ -25,7 +25,7 @@ class PlayerTests(unittest.TestCase):
      def test_should_take_winning_position(self):
          player = Player("Sasi", "X")
          board = TicTacBoard(3)
-         game = Game(board)
+         game = Game(board, difficulty_level)
          board.place_position((1,1), "X")
          board.place_position((2,2), "O")
          board.place_position((1,0), "X")
@@ -36,14 +36,14 @@ class PlayerTests(unittest.TestCase):
      def test_find_best_position_for_player(self):
          player = Player("Sasi", "X")
          board = TicTacBoard(3)
-         game = Game(board)
+         game = Game(board, difficulty_level)
          board.place_position((1,1), "X")
          self.assertEqual(player.get_next_position(game, "O", "X"), (2,2))
 
      def test_block_opponent_from_winning_right_diagonal(self):
          player = Player("Sasi", "X")
          board = TicTacBoard(3)
-         game = Game(board)
+         game = Game(board, difficulty_level)
          board.place_position((1,1), "X")
          board.place_position((2,2), "O")
          board.place_position((2,0), "X")
@@ -52,7 +52,7 @@ class PlayerTests(unittest.TestCase):
      def test_block_opponent_from_winning_left_diagonal(self):
          player = Player("Sasi", "X")
          board = TicTacBoard(3)
-         game = Game(board)
+         game = Game(board, difficulty_level)
          board.place_position((2,2), "X")
          board.place_position((2,1), "O")
          board.place_position((1,1), "X")

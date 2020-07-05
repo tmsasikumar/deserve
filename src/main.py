@@ -1,10 +1,18 @@
+from src.Botplayer import BotPlayer
 from src.Constants import X_SYMBOL, O_SYMBOL, DRAW
+from src.botplayable.bot_easy_playable import BotEasyPlayable
+from src.botplayable.bot_hard_playable import BotHardPlayable
+from src.botplayable.bot_medium_playable import BotMediumPlayable
+from src.botplayable.bot_very_hard_playable import BotVeryHardPlayable
+from src.difficulty_level import Difficult_level
 from src.game import Game
 from src.player import Player
 from src.tic_tac_board import TicTacBoard
 
 board = TicTacBoard(3)
-game = Game(board)
+difficulty_level = int(input("Enter difficulty level (1,2,3,4,5):"))
+
+game = Game(board, difficulty_level)
 
 player1_name = input("Enter player1 name:")
 player1_symbol = input("Enter player1 symbol:")
@@ -21,7 +29,20 @@ if player2_symbol == player1_symbol:
     print("Hence allocating - " + player2_symbol)
 
 player1 = Player(player1_name, player1_symbol)
-player2 = Player(player2_name, player2_symbol)
+
+
+def createPlayable(difficulty_level):
+    if(difficulty_level == Difficult_level.EASY.value):
+        return BotEasyPlayable()
+    elif difficulty_level == Difficult_level.MEDIUM.value:
+        return BotMediumPlayable()
+    elif difficulty_level == Difficult_level.HARD.value:
+        return BotHardPlayable()
+    elif difficulty_level == Difficult_level.VERY_HARD.value:
+        return BotVeryHardPlayable()
+
+
+player2 = BotPlayer(player2_name, player2_symbol, createPlayable(difficulty_level))
 
 board.print_board()
 
