@@ -1,4 +1,4 @@
-from src.Constants import BLANK, X_SYMBOL, X_WINS, O_SYMBOL, O_WINS, DRAW
+from src.Constants import BLANK, X_SYMBOL, X_WINS, O_SYMBOL, O_WINS, DRAW, LEFT, RIGHT, COLUMN, ROW
 
 
 class Game():
@@ -25,12 +25,12 @@ class Game():
             symbol_counter = 0
             blank_counter = 0
             for col in range(0, self.getBoardSize()):
-                temp = self.getBoard()[row][col] if order == "COLUMN" else self.getBoard()[col][row]
+                temp = self.getBoard()[row][col] if order == COLUMN else self.getBoard()[col][row]
                 if temp == symbol:
                     symbol_counter += 1
                 elif temp == BLANK:
                     blank_counter += 1
-                    win_pos = (row, col) if order == "COLUMN" else (col, row)
+                    win_pos = (row, col) if order == COLUMN else (col, row)
                 if symbol_counter == self.getBoardSize() - 1 and blank_counter == 1:
                     return win_pos
         return ()
@@ -38,20 +38,13 @@ class Game():
     def possible_win_for_player(self, symbol):
         win_pos = ()
         # Check column for potential win
-        win_pos = self.possible_win_calc("COLUMN", symbol)
-        if win_pos:
-            return win_pos
-        # Check row for potential win
-        win_pos = self.possible_win_calc("ROW", symbol)
-        if win_pos:
-            return win_pos
-        # Check first diagonal for potential win
-        win_pos = self.possible_win_calc_diagonal("LEFT", symbol)
-        if win_pos:
-            return win_pos
-        # Check second diagonal for potential win
-        win_pos = self.possible_win_calc_diagonal("RIGHT", symbol)
+        functions_to_validate = [self.possible_win_calc(COLUMN, symbol), self.possible_win_calc(ROW, symbol),
+                                 self.possible_win_calc_diagonal(LEFT, symbol),self.possible_win_calc_diagonal(RIGHT, symbol) ]
 
+        for func in functions_to_validate:
+            win_pos = func
+            if win_pos:
+                return  win_pos
         return win_pos
 
     def is_completed_with_win(self, pos):
@@ -78,12 +71,12 @@ class Game():
         symbol_counter = 0
         blank_counter = 0
         for i in range(0, self.getBoardSize()):
-            temp = self.getBoard()[i][i] if order == "LEFT" else self.getBoard()[i][2-i]
+            temp = self.getBoard()[i][i] if order == LEFT else self.getBoard()[i][2-i]
             if temp == symbol:
                 symbol_counter += 1
             elif temp == BLANK:
                 blank_counter += 1
-                win_pos = (i,i) if order == "LEFT" else (i, 2-i)
+                win_pos = (i,i) if order == LEFT else (i, 2-i)
             if symbol_counter == self.getBoardSize() -1 and blank_counter == 1:
                 return win_pos
 
