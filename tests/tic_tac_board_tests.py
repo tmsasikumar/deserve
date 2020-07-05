@@ -27,8 +27,3 @@ class TicTacToeTests(unittest.TestCase):
         board = TicTacBoard(3)
         board.place_position((0,0), "X")
         self.assertFalse(board.is_position_valid((0,0)))
-
-
-    def test_should_get_all_possible_combos(self):
-        board = TicTacBoard(3)
-        print(board.get_all_possible_combos())
